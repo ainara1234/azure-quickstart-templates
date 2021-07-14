@@ -267,7 +267,7 @@
       "value": "[format('ssh {0}@{1}', parameters('adminUsername'), reference(resourceId('Microsoft.Network/publicIPAddresses', variables('publicIPAddressName'))).dnsSettings.fqdn)]"
     }
   },
-  {
+ 
             "type": "Microsoft.Compute/disks",
             "apiVersion": "2018-06-01",
             "name": "[variables('dataDiskName')]",
