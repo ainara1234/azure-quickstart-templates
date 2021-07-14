@@ -266,5 +266,31 @@
       "type": "string",
       "value": "[format('ssh {0}@{1}', parameters('adminUsername'), reference(resourceId('Microsoft.Network/publicIPAddresses', variables('publicIPAddressName'))).dnsSettings.fqdn)]"
     }
+  }, 
+  {
+            "type": "Microsoft.Compute/disks",
+            "apiVersion": "2018-06-01",
+            "name": "[variables('dataDiskName')]",
+            "location": "[resourceGroup().location]",
+            "sku": {
+                "name": "Standard_LRS"
+            },
+            "properties": {
+                "creationData": {
+                    "createOption": "Empty"
+                },
+                "diskSizeGB": "[parameters('diskSize')]"
+            }
+        },
+"dataDisks": [
+    {
+        "lun": 0,
+        "name": "[concat('dataacademy', take(uniqueString(resourceGroup().id), 6))]",
+        "createOption": "attach",
+        "managedDisk": {
+            "id": "[resourceId('Microsoft.Compute/disks/', concat('dataacademy', take(uniqueString(resourceGroup().id), 6)))]"
+        }
+    }
   }
+]
 }
